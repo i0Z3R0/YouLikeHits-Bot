@@ -132,4 +132,5 @@ endpointss = driver.find_element(By.XPATH, '//*[@id="currentpoints"]').text
 endpoints = int(endpointss.replace(',', ''))
 earnedpoints = endpoints - startpoints
 os.system('clear')
-print(f'Finished\n{earnedpoints} Earned')
+print(f'Finished\n{earnedpoints} Points Earned')
+driver.quit()
