@@ -17,7 +17,6 @@ YLHTwitch = 'https://www.youlikehits.com/twitch.php'
 settingU = json.load(open('settings.json'))
 jtopy = json.dumps(settingU)
 setting = json.loads(jtopy)
-# Won't convert each item to a variable, keep as a dictionary for easier access
 
 # Starting Chromedriver
 print('Starting...')
