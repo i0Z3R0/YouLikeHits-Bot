@@ -126,7 +126,7 @@ def ylhtwitter():
 		loops += 1
 
 
-for i in range(1):
+for i in range(100):
 	ylhtwitter()
 
 driver.implicitly_wait(3)

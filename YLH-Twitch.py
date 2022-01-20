@@ -130,7 +130,7 @@ def ylhtwitch():
 		loops += 1
 
 
-for i in range(1):
+for i in range(100):
 	ylhtwitch()
 
 driver.implicitly_wait(3)
