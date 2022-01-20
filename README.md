@@ -8,17 +8,7 @@
 - [Installation](#installation)
 - [About](#about)
 - [Overview of Features](#overview-of-features)
-  * [Single Lobby Swarm](#single-lobby-swarm)
-  * [Multi Lobby Single Spam](#multi-lobby-single-spam)
 - [Detailed Overview](#detailed-overview)
-  * [Single Lobby Swarm](#single-lobby-swarm-1)
-    + [Overview](#overview)
-    + [Detailed Breakdown](#detailed-breakdown)
-    + [Customization Options](#customization-options)
-  * [Multi Lobby Single Spam](#multi-lobby-single-spam-1)
-    + [Overview](#overview-1)
-    + [Detailed Breakdown](#detailed-breakdown-1)
-    + [Customization Options](#customization-options-1)
 
 # Prerequisites
 - Latest version of Python3
@@ -51,7 +41,7 @@ This is a tool that will automatically earn you points on YouLikeHits. Currently
 ### **Overview**
 This tool will follow all the Twitch users on YouLikeHits' Twitch follower page, earning you lots of points. Minimal interaction is needed, and once running, can be left running forever.
 ### **Detailed Breakdown**
-The bot will first navigate to the Twitch login page. Your info will be automatically submitted, but you will need to verify with a code from  your email when you sign in. Complete additional anti-bot captchas if necessary, this bot does not do that. After you're done, press enter. Then, the bot will sign in to the YouLikeHits website with your provided credentials. Press enter once you see the bot logged in successfully (hCaptcha sometimes shows up). The bot will navigate to the Twitch follower page, and follow each user, thus earning you a lot of points. After all the users have been followed, it will reload the page and continue following new users. If the bot is stuck on a page and can't follow, it will simply skip that user. 
+The bot will first navigate to the Twitch login page. Your info will be automatically submitted, but you will need to verify with a code from  your email when you sign in. Complete additional anti-bot captchas if necessary, this bot does not do that. After you're done, press enter. Then, the bot will sign in to the YouLikeHits website with your provided credentials. Press enter once you see the bot logged in successfully (hCaptcha sometimes shows up). The bot will navigate to the Twitch follower page, and follow each user, thus earning you a lot of points. After all the users have been followed, it will reload the page and continue following new users. If the bot is stuck on a page and can't follow, it will simply skip that user.
 
 ### **Settings**
 - **YLH Username** - String (Line 2): Your username for YouLikeHits, found on the top right corner of any YLH page.
