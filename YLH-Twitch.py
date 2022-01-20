@@ -13,7 +13,7 @@ YLHSignIn = 'https://www.youlikehits.com/login.php'
 twitchSignIn = 'https://www.twitch.tv/login'
 YLHTwitch = 'https://www.youlikehits.com/twitch.php'
 
-# Importing Settings from settings.json
+# Importing Settings
 settingU = json.load(open('settings.json'))
 jtopy = json.dumps(settingU)
 setting = json.loads(jtopy)
