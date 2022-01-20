@@ -40,7 +40,7 @@ try:
 	driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[3]/div/div/div/div[3]/div[3]/button').click()
 except:
 	if setting["headlessmode"]:
-		print('Possible Captcha Detected, Restart Program Please')
+		print('Possible Captcha Detected, Restart Unless You Received an Email Code')
 #input('Press Enter After You Have Entered Code And Logged In')
 twitchcode = input("Twitch Email Code: ")
 driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[3]/div/div/div/div[3]/div[2]/div/div[1]/div/input').send_keys(twitchcode)
