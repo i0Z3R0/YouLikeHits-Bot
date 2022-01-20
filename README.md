@@ -48,4 +48,4 @@ The bot will first navigate to the Twitch login page. Your info will be automati
 - **YLH Password** - String (Line 3): The password to your account.
 - **Twitch Username** - String (Line 4): Your Twitch username.
 - **Twitch Password** - String (Line 5): Your Twitch password.
-- **Headless Mode** - Boolean (Line 6): Currently, this option should always be set to false as the bot can't run in headless mode (captchas etc.)
+- **Headless Mode** - Boolean (Line 6): Headless mode is buggy and only works some of the time. Would recommend setting this to false. 

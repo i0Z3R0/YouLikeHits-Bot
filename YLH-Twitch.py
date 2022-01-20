@@ -35,14 +35,24 @@ driver.implicitly_wait(1)
 driver.find_element(By.XPATH, '//*[@id="login-username"]').send_keys(setting["twitchUsername"])
 driver.find_element(By.XPATH, '//*[@id="password-input"]').send_keys(setting["twitchPassword"])
 driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[3]/div/div/div/div[3]/form/div/div[3]/button/div/div').click()
-input('Press Enter After You Have Entered Code And Logged In')
+time.sleep(3)
+try:
+	driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[3]/div/div/div/div[3]/div[3]/button').click()
+except:
+	if setting["headlessmode"]:
+		print('Possible Captcha Detected, Restart Program Please')
+#input('Press Enter After You Have Entered Code And Logged In')
+twitchcode = input("Twitch Email Code: ")
+driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[3]/div/div/div/div[3]/div[2]/div/div[1]/div/input').send_keys(twitchcode)
+time.sleep(5)
 
 # Sign in to YLH
 driver.get(YLHSignIn)
 driver.find_element(By.XPATH, '//*[@id="username"]').send_keys(setting["YLHUsername"])
 driver.find_element(By.XPATH, '//*[@id="password"]').send_keys(setting["YLHPassword"])
 driver.find_element(By.XPATH, '/html/body/table[2]/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td/center/form/table/tbody/tr[3]/td/span/input').click()
-input('Press Enter to Confirm Successful Login')
+if setting["headlessmode"] == False:
+	input('Press Enter to Confirm Successful Login')
 
 # Get Current Points
 driver.get(YLHTwitch)
@@ -84,7 +94,12 @@ def ylhtwitch():
 			try:
 				action = webdriver.common.action_chains.ActionChains(driver)
 				driver.switch_to.window(followPage)
-				time.sleep(4)
+				time.sleep(5)
+				try:
+					# Time Machine
+					if "time machine" in driver.find_element(By.XPATH, '//*[@id="root"]/div/div[2]/div[1]/main/div[2]/div[3]/div/div/div/div/div[2]/p').text.lower()
+				except:
+					pass
 				driver.implicitly_wait(1.5)
 				twitchfollowbtn = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[2]/div[1]/main/div[2]/div[3]/div/div/div[1]/div[1]/div[2]/div/div[2]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div/div/div/button')
 				action.click_and_hold(twitchfollowbtn).perform()
