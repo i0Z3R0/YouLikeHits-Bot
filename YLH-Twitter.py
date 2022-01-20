@@ -5,16 +5,17 @@ import json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 YLHSignIn = 'https://www.youlikehits.com/login.php'
-twitchSignIn = 'https://www.twitch.tv/login'
-YLHTwitch = 'https://www.youlikehits.com/twitch.php'
+twitterSignIn = 'https://twitter.com/i/flow/login'
+YLHTwitter = 'https://www.youlikehits.com/twitter2.php'
 
 # Importing Settings
-settingU = json.load(open('settings.json'))
+settingU = json.load(open('twitter.json'))
 jtopy = json.dumps(settingU)
 setting = json.loads(jtopy)
 
@@ -29,22 +30,19 @@ chrome_options.add_argument("--mute-audio")
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options, desired_capabilities=caps)
 os.system('clear')
 
-# Sign in to Twitch
-driver.get(twitchSignIn)
+# Sign in to Twitter
+driver.get(twitterSignIn)
+time.sleep(7)
 driver.implicitly_wait(1)
-driver.find_element(By.XPATH, '//*[@id="login-username"]').send_keys(setting["twitchUsername"])
-driver.find_element(By.XPATH, '//*[@id="password-input"]').send_keys(setting["twitchPassword"])
-driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[3]/div/div/div/div[3]/form/div/div[3]/button/div/div').click()
+driver.find_element(By.XPATH, '//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[5]/label').send_keys(setting["twitterUsername"])
+time.sleep(2)
+driver.find_element(By.XPATH, '//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[6]').click()
+time.sleep(2)
+driver.find_element(By.XPATH, '//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[3]/div/label').send_keys(setting["twitterPassword"])
+time.sleep(2)
+driver.find_element(By.XPATH, '//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div').click()
 time.sleep(3)
-try:
-	driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[3]/div/div/div/div[3]/div[3]/button').click()
-except:
-	if setting["headlessmode"]:
-		print('Possible Captcha Detected, Restart Unless You Received an Email Code')
 #input('Press Enter After You Have Entered Code And Logged In')
-twitchcode = input("Twitch Email Code: ")
-driver.find_element(By.XPATH, '//*[@id="root"]/div/div[1]/div[3]/div/div/div/div[3]/div[2]/div/div[1]/div/input').send_keys(twitchcode)
-time.sleep(5)
 
 # Sign in to YLH
 driver.get(YLHSignIn)
@@ -55,18 +53,18 @@ if setting["headlessmode"] == False:
 	input('Press Enter to Confirm Successful Login')
 
 # Get Current Points
-driver.get(YLHTwitch)
+driver.get(YLHTwitter)
 driver.implicitly_wait(3)
 startpointss = driver.find_element(By.XPATH, '//*[@id="currentpoints"]').text
 startpoints = int(startpointss.replace(',', ''))
 
-# Twitch Loop
-def ylhtwitch():
-	driver.get(YLHTwitch)
+# Twitter Loop
+def ylhtwitter():
+	driver.get(YLHTwitter)
 	followbuttons = []
 	confirmbuttons = []
 	allbuttons = driver.find_elements(By.CLASS_NAME, 'followbutton')
-	YLHTwitchPage = driver.current_window_handle
+	YLHTwitterPage = driver.current_window_handle
 	for button in allbuttons:
 		if button.text == 'Follow':
 			followbuttons.append(button)
@@ -77,7 +75,7 @@ def ylhtwitch():
 
 	loops = 0
 	for button in followbuttons:
-		driver.switch_to.window(YLHTwitchPage)
+		driver.switch_to.window(YLHTwitterPage)
 		try:
 			button.click()
 		except:
@@ -85,27 +83,25 @@ def ylhtwitch():
 			continue
 		time.sleep(3)
 		for handle in driver.window_handles:
-			if handle != YLHTwitchPage:
+			if handle != YLHTwitterPage:
 				followPage = handle
 		complete = 0
 		fails = 0
 		# Follow
+
+		# Wait for the stupid redirect
 		while complete != 1:
 			try:
 				action = webdriver.common.action_chains.ActionChains(driver)
 				driver.switch_to.window(followPage)
-				time.sleep(5)
 				try:
-					# Time Machine
-					if "time machine" in driver.find_element(By.XPATH, '//*[@id="root"]/div/div[2]/div[1]/main/div[2]/div[3]/div/div/div/div/div[2]/p').text.lower():
-						# Uh can't click on skip for now so just continue loop
-						complete = 1
-						break
+					driver.find_element(By.XPATH, '//*[@id="autoclick"]/b').click()
 				except:
-					pass
+					time.sleep(5)
+				time.sleep(3)
 				driver.implicitly_wait(1.5)
-				twitchfollowbtn = driver.find_element(By.XPATH, '//*[@id="root"]/div/div[2]/div[1]/main/div[2]/div[3]/div/div/div[1]/div[1]/div[2]/div/div[2]/div[1]/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div/div/div/button')
-				action.click_and_hold(twitchfollowbtn).perform()
+				twitterfollowbtn = driver.find_element(By.XPATH, '//*[@id="layers"]/div[2]/div/div/div/div/div/div[2]/div[2]/div[2]/div[1]/div')
+				action.click_and_hold(twitterfollowbtn).perform()
 				time.sleep(0.2)
 				action.release().perform()
 				time.sleep(2)
@@ -117,7 +113,7 @@ def ylhtwitch():
 				pass
 		# Confirm
 		driver.close()
-		driver.switch_to.window(YLHTwitchPage)
+		driver.switch_to.window(YLHTwitterPage)
 		try:
 			confirmbuttons[loops].click()
 		except:
@@ -127,7 +123,7 @@ def ylhtwitch():
 
 
 for i in range(1):
-	ylhtwitch()
+	ylhtwitter()
 
 driver.implicitly_wait(3)
 endpointss = driver.find_element(By.XPATH, '//*[@id="currentpoints"]').text
