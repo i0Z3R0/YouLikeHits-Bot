@@ -97,7 +97,10 @@ def ylhtwitch():
 				time.sleep(5)
 				try:
 					# Time Machine
-					if "time machine" in driver.find_element(By.XPATH, '//*[@id="root"]/div/div[2]/div[1]/main/div[2]/div[3]/div/div/div/div/div[2]/p').text.lower()
+					if "time machine" in driver.find_element(By.XPATH, '//*[@id="root"]/div/div[2]/div[1]/main/div[2]/div[3]/div/div/div/div/div[2]/p').text.lower():
+						# Uh can't click on skip for now so just continue loop
+						complete = 1
+						break
 				except:
 					pass
 				driver.implicitly_wait(1.5)
@@ -125,7 +128,7 @@ def ylhtwitch():
 ylhtwitch()
 
 driver.implicitly_wait(3)
-endpointss = int(driver.find_element(By.XPATH, '//*[@id="currentpoints"]').text)
+endpointss = driver.find_element(By.XPATH, '//*[@id="currentpoints"]').text
 endpoints = int(endpointss.replace(',', ''))
 earnedpoints = endpoints - startpoints
 os.system('clear')
