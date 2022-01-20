@@ -14,7 +14,7 @@ twitchSignIn = 'https://www.twitch.tv/login'
 YLHTwitch = 'https://www.youlikehits.com/twitch.php'
 
 # Importing Settings
-settingU = json.load(open('settings.json'))
+settingU = json.load(open('twitch.json'))
 jtopy = json.dumps(settingU)
 setting = json.loads(jtopy)
 
