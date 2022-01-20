@@ -70,9 +70,13 @@ def ylhtwitch():
 	for button in allbuttons:
 		if button.text == 'Follow':
 			followbuttons.append(button)
+			if len(followbuttons) > 6:
+				break
 			continue
 		if button.text == 'Confirm':
 			confirmbuttons.append(button)
+			if len(followbuttons) > 6:
+				break
 			continue
 
 	loops = 0
