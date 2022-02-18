@@ -20,6 +20,7 @@ setting = json.loads(jtopy)
 
 # Starting Chromedriver
 print('Starting...')
+os.environ['WDM_LOG_LEVEL'] = '0'
 caps = DesiredCapabilities().CHROME
 caps["pageLoadStrategy"] = "normal"
 chrome_options = Options()
